@@ -1,0 +1,16 @@
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/ms_user?useTimezone=true&serverTimezone=UTC
+    username:
+    password:
+
+  application:
+    name: msuser
+server:
+  port: 8080
+
