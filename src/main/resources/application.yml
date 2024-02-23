@@ -1,5 +1,8 @@
 
 spring:
+  mvc:
+    format:
+      date-time: iso
   jpa:
     hibernate:
       ddl-auto: update
