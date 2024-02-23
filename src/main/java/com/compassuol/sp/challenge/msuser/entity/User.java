@@ -2,13 +2,16 @@ package com.compassuol.sp.challenge.msuser.entity;
 
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "person")
-public class Person {
+@Table(name = "user")
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +24,8 @@ public class Person {
     private String email;
 
     @Column
-    private Date birthDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
+    private LocalDateTime birthDate;
     @Column
     private String cpf;
     @Column
@@ -31,7 +35,7 @@ public class Person {
     @Column
     private String password;
 
-    public Person(String firstName, String lastName, String email, Date birthDate, String cpf, String cep, boolean active, String password) {
+    public User(String firstName, String lastName, String email, LocalDateTime birthDate, String cpf, String cep, boolean active, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -42,8 +46,12 @@ public class Person {
         this.password = password;
     }
 
-    public Person() {
+    public User() {
 
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -72,11 +80,11 @@ public class Person {
         this.email = email;
     }
 
-    public Date getBirthDate() {
+    public LocalDateTime getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDateTime birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -116,8 +124,8 @@ public class Person {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return Objects.equals(firstName, person.firstName) && Objects.equals(lastName, person.lastName) && Objects.equals(email, person.email) && Objects.equals(cpf, person.cpf);
+        User user = (User) o;
+        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(cpf, user.cpf);
     }
 
     @Override
