@@ -15,7 +15,7 @@ import java.util.Objects;
 
 public class JwtUtils {
 
-    public static final String JWT_BEARER = "Bearer";
+    public static final String JWT_BEARER = "Bearer ";
     public static final String JWT_AUTHORIZATION= "Authorization";
     public static final String SECRET_KEY = "0123456789-0123456789-0123456789";
     public static final Long  EXPIRE_DAYS=0L;
@@ -56,6 +56,7 @@ public class JwtUtils {
         } catch (JwtException ex) {
             System.out.println("Error: "+ex.getMessage());
         }
+
         return null;
     }
 

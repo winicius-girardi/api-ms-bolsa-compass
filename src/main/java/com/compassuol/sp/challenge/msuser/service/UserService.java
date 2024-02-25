@@ -5,6 +5,8 @@ import com.compassuol.sp.challenge.msuser.dto.user.UserCreateDto;
 import com.compassuol.sp.challenge.msuser.dto.user.UserResponseDto;
 import com.compassuol.sp.challenge.msuser.dto.mapper.UserMapper;
 import com.compassuol.sp.challenge.msuser.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,15 +15,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService {
 
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-    private UserValidatorService userValidatorService;
+    @Autowired
+    private ValidatorService validatorService;
     @Transactional
-    public UserResponseDto createPerson(UserCreateDto personRequestDto) {
-        var person = userMapper.createDtoToEntity(personRequestDto);
-        userValidatorService.validatePerson(person);
-        return userMapper.entityToResponse(userRepository.save(person));
+    public UserResponseDto createUser(UserCreateDto userRequestDto) {
+        validatorService.validatePerson(userRequestDto);
+        var user = userMapper.createDtoToEntity(userRequestDto);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        var savedUser = userRepository.save(user);
+        return userMapper.entityToResponse(savedUser);
     }
     @Transactional(readOnly = true)
     public UserResponseDto findUserById(Long id) {
@@ -29,15 +38,15 @@ public class UserService {
     }
 
 
-    @Transactional
+    @Transactional(readOnly = true)
     public void login(LoginRequestDto loginRequestDto) {
-        userValidatorService.validateLogin(loginRequestDto);
+        validatorService.validateLogin(loginRequestDto);
     }
     @Transactional
     public void changePassword(Long id, String newPassword) {
         var user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
-        userValidatorService.validatePassword(newPassword);
-        user.setPassword(newPassword);
+        validatorService.validateChangePassword(newPassword,user.getPassword());
+        user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
     @Transactional
