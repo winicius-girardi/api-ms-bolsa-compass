@@ -1,0 +1,19 @@
+
+spring:
+  mvc:
+    format:
+      date-time: iso
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/ms_address?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: nozick
+
+  application:
+    name: msaddress
+server:
+  port: 8081
+
