@@ -13,15 +13,15 @@ public class UserResponseDto {
 
     private String cpf;
 
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    private LocalDateTime birthdate;
+    private String birthdate;
     private String email;
 
     private String cep;
 
-    private String password;
+    private boolean active;
 
-    public UserResponseDto(Long id, String firstName, String lastName, String cpf, LocalDateTime birthdate, String email, String cep, String password) {
+
+    public UserResponseDto(Long id, String firstName, String lastName, String cpf, String birthdate, String email, String cep,boolean active){
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,8 +29,17 @@ public class UserResponseDto {
         this.birthdate = birthdate;
         this.email = email;
         this.cep = cep;
-        this.password = password;
+        this.active =active;
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public UserResponseDto(){}
 
     public Long getId() {
@@ -65,11 +74,11 @@ public class UserResponseDto {
         this.cpf = cpf;
     }
 
-    public LocalDateTime getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDateTime birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -89,12 +98,6 @@ public class UserResponseDto {
         this.cep = cep;
     }
 
-    public String getPassword() {
-        return password;
-    }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
 }

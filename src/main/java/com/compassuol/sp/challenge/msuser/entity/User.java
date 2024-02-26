@@ -31,11 +31,11 @@ public class User implements Serializable {
     @Column
     private String cep;
     @Column
-    private boolean active;
+    private Boolean active;
     @Column
     private String password;
 
-    public User(String firstName, String lastName, String email, LocalDateTime birthDate, String cpf, String cep, boolean active, String password) {
+    public User(String firstName, String lastName, String email, LocalDateTime birthDate, String cpf, String cep, Boolean active, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -104,11 +104,11 @@ public class User implements Serializable {
         this.cep = cep;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(Boolean active) {
         this.active = active;
     }
 

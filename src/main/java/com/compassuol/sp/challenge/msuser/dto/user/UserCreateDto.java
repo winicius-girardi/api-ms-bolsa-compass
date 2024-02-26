@@ -9,7 +9,7 @@ public class UserCreateDto {
 
     private String cpf;
 
-    private Date birthdate;
+    private String birthdate;
     private String email;
 
     private String cep;
@@ -21,7 +21,7 @@ public class UserCreateDto {
 
     public UserCreateDto() {
     }
-    public UserCreateDto(String firstName, String lastName, String cpf, Date birthdate, String email, String cep, String password, boolean active) {
+    public UserCreateDto(String firstName, String lastName, String cpf, String birthdate, String email, String cep, String password, boolean active) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cpf = cpf;
@@ -56,11 +56,11 @@ public class UserCreateDto {
         this.cpf = cpf;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
