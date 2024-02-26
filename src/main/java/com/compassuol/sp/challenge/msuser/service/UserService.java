@@ -4,6 +4,8 @@ import com.compassuol.sp.challenge.msuser.dto.LoginRequestDto;
 import com.compassuol.sp.challenge.msuser.dto.user.UserCreateDto;
 import com.compassuol.sp.challenge.msuser.dto.user.UserResponseDto;
 import com.compassuol.sp.challenge.msuser.dto.mapper.UserMapper;
+import com.compassuol.sp.challenge.msuser.exception.customexceptions.EntityNotFoundException;
+import com.compassuol.sp.challenge.msuser.exception.customexceptions.UserValidationException;
 import com.compassuol.sp.challenge.msuser.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -34,7 +36,7 @@ public class UserService {
     }
     @Transactional(readOnly = true)
     public UserResponseDto findUserById(Long id) {
-        return userMapper.entityToResponse(userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found")));
+        return userMapper.entityToResponse(userRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("User not found")));
     }
 
 
@@ -44,7 +46,7 @@ public class UserService {
     }
     @Transactional
     public void changePassword(Long id, String newPassword) {
-        var user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("User not found"));
+        var user = userRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("User not found"));
         validatorService.validateChangePassword(newPassword,user.getPassword());
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
@@ -52,7 +54,7 @@ public class UserService {
     @Transactional
     public void changeUserState(Long id, boolean active) {
         var foundUser=userRepository.findById(id).orElseThrow(()->
-                new RuntimeException("User not found"));
+                new EntityNotFoundException("User not found"));
         foundUser.setActive(active);
     }
 }
