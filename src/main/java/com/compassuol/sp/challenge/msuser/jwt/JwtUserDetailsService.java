@@ -2,7 +2,6 @@ package com.compassuol.sp.challenge.msuser.jwt;
 
 import com.compassuol.sp.challenge.msuser.entity.User;
 import com.compassuol.sp.challenge.msuser.repository.UserRepository;
-import com.compassuol.sp.challenge.msuser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

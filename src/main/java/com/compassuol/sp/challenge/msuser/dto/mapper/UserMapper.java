@@ -3,13 +3,11 @@ package com.compassuol.sp.challenge.msuser.dto.mapper;
 import com.compassuol.sp.challenge.msuser.dto.user.UserCreateDto;
 import com.compassuol.sp.challenge.msuser.dto.user.UserResponseDto;
 import com.compassuol.sp.challenge.msuser.entity.User;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 

@@ -1,7 +1,5 @@
 package com.compassuol.sp.challenge.msuser.dto.user;
 
-import java.util.Date;
-
 public class UserCreateDto {
 
     private String firstName;

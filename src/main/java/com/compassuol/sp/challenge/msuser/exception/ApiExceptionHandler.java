@@ -2,6 +2,7 @@ package com.compassuol.sp.challenge.msuser.exception;
 
 
 import com.compassuol.sp.challenge.msuser.exception.customexceptions.EntityNotFoundException;
+import com.compassuol.sp.challenge.msuser.exception.customexceptions.PublisherRequestException;
 import com.compassuol.sp.challenge.msuser.exception.customexceptions.UserValidationException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -30,7 +31,7 @@ public class ApiExceptionHandler {
                 .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, "Campo(s) invalidos", result));
     }
 
-    @ExceptionHandler({UserValidationException.class})
+    @ExceptionHandler({UserValidationException.class, PublisherRequestException.class})
     public ResponseEntity<ErrorMessage> userValidationViolationException(RuntimeException ex,
                                                                          HttpServletRequest request
     ) {

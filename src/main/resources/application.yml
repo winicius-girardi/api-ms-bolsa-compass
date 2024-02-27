@@ -3,10 +3,12 @@ spring:
   mvc:
     format:
       date-time: iso
+
   jpa:
     hibernate:
       ddl-auto: update
     open-in-view: true
+
   datasource:
     url: jdbc:mysql://localhost:3306/ms_user?useTimezone=true&serverTimezone=UTC
     username:
@@ -14,6 +16,16 @@ spring:
 
   application:
     name: msuser
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 server:
   port: 8080
 
+mq:
+  queues:
+    ms-notifications: ms-notifications
+    ms-address: ms-address

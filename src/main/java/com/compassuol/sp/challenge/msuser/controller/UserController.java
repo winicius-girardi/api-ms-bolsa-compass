@@ -1,9 +1,9 @@
 package com.compassuol.sp.challenge.msuser.controller;
 
 
-import com.compassuol.sp.challenge.msuser.dto.UserStateDto;
 import com.compassuol.sp.challenge.msuser.dto.user.UserCreateDto;
 import com.compassuol.sp.challenge.msuser.dto.user.UserResponseDto;
+import com.compassuol.sp.challenge.msuser.dto.user.UserStateDto;
 import com.compassuol.sp.challenge.msuser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

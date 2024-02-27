@@ -1,6 +1,4 @@
-package com.compassuol.sp.challenge.msuser.dto;
-
-import jdk.jfr.BooleanFlag;
+package com.compassuol.sp.challenge.msuser.dto.user;
 
 public class UserStateDto {
 
