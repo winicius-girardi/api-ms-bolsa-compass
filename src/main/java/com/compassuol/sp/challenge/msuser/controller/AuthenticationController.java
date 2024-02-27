@@ -4,6 +4,7 @@ import com.compassuol.sp.challenge.msuser.dto.user.LoginRequestDto;
 import com.compassuol.sp.challenge.msuser.exception.ErrorMessage;
 import com.compassuol.sp.challenge.msuser.jwt.JwtToken;
 import com.compassuol.sp.challenge.msuser.jwt.JwtUserDetailsService;
+import com.compassuol.sp.challenge.msuser.service.PublisherService;
 import com.compassuol.sp.challenge.msuser.service.ValidatorService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,8 @@ public class AuthenticationController {
     @Autowired
     public ValidatorService validatorService;
 
-
-
-
+    @Autowired
+    private PublisherService publisherService;
 
 
 
@@ -42,6 +42,7 @@ public class AuthenticationController {
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(), loginRequestDto.getPassword());
             authenticationManager.authenticate(authenticationToken);
             JwtToken token = jwtUserDetailsService.getTokenAutheticated(loginRequestDto.getEmail());
+            publisherService.sendNotification(loginRequestDto.getEmail(),"LOGIN");
             return ResponseEntity.ok(token);
 
         }catch (AuthenticationException e){
@@ -51,7 +52,6 @@ public class AuthenticationController {
                 .badRequest()
                 .body(new ErrorMessage(request, HttpStatus.BAD_REQUEST, "Invalid username or password"));
 
-        // return ResponseEntity.ok(userService.login(loginRequestDto));
     }
 
 }

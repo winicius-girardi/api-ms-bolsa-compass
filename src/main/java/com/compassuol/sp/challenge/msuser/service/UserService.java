@@ -37,9 +37,8 @@ public class UserService {
         var user = userMapper.createDtoToEntity(userRequestDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         var savedUser = userRepository.save(user);
-        Instant date = Instant.now();
-        LocalDateTime localDateTime = LocalDateTime.ofInstant(date, ZoneId.of("Greenwich"));
-        publisherService.sendNotification(localDateTime,savedUser.getEmail(),"CREATE");
+
+        publisherService.sendNotification(savedUser.getEmail(),"CREATE");
         publisherService.sendAddress(savedUser.getCep(),savedUser.getId());
         return userMapper.entityToResponse(savedUser);
     }
@@ -55,11 +54,13 @@ public class UserService {
         validatorService.validateChangePassword(newPassword,user.getPassword());
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
+        publisherService.sendNotification(user.getEmail(),"UPDATE_PASSWORD");
     }
     @Transactional
     public void changeUserState(Long id, boolean active) {
         var foundUser=userRepository.findById(id).orElseThrow(()->
                 new EntityNotFoundException("User not found"));
         foundUser.setActive(active);
+        publisherService.sendNotification(foundUser.getEmail(),"UPDATE");
     }
 }

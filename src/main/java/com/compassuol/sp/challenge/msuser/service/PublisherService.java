@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 @Service
 public class PublisherService {
@@ -23,13 +25,15 @@ public class PublisherService {
 
 
     @Transactional
-    public void sendNotification(LocalDateTime date, String email, String create) {
-        UserNotificationPublisher notification = new UserNotificationPublisher(email,create,date.toString());
+    public void sendNotification(String email, String create) {
+        //TODO - localDateTime SHOULD BE IN ISO FORMAT
+        Instant date = Instant.now();
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(date, ZoneId.of("Greenwich"));
+        UserNotificationPublisher notification = new UserNotificationPublisher(email,create,localDateTime.toString());
         try {
             notificationPublisher.sendNotification(notification);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new PublisherRequestException("Error to send notification"+ e.getMessage());
+            throw new PublisherRequestException("Error to send notification");
         }
     }
     @Transactional
