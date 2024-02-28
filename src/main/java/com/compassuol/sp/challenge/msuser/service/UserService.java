@@ -1,19 +1,16 @@
 package com.compassuol.sp.challenge.msuser.service;
 
 import com.compassuol.sp.challenge.msuser.dto.mapper.UserMapper;
-import com.compassuol.sp.challenge.msuser.dto.user.UserCreateDto;
-import com.compassuol.sp.challenge.msuser.dto.user.UserResponseDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.PasswordChangeDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.UserCreateDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.UserResponseDto;
+import com.compassuol.sp.challenge.msuser.entity.User;
 import com.compassuol.sp.challenge.msuser.exception.customexceptions.EntityNotFoundException;
 import com.compassuol.sp.challenge.msuser.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 
 @Service
@@ -49,10 +46,11 @@ public class UserService {
 
 
     @Transactional
-    public void changePassword(Long id, String newPassword) {
-        var user = userRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("User not found"));
-        validatorService.validateChangePassword(newPassword,user.getPassword());
-        user.setPassword(passwordEncoder.encode(newPassword));
+    public void changePassword(Long id, PasswordChangeDto newPassword) {
+        String password = newPassword.getPassword();
+        User user = userRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("User not found"));
+        validatorService.validateChangePassword(password,user.getPassword());
+        user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
         publisherService.sendNotification(user.getEmail(),"UPDATE_PASSWORD");
     }

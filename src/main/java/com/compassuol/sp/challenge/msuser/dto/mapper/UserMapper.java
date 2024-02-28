@@ -1,7 +1,7 @@
 package com.compassuol.sp.challenge.msuser.dto.mapper;
 
-import com.compassuol.sp.challenge.msuser.dto.user.UserCreateDto;
-import com.compassuol.sp.challenge.msuser.dto.user.UserResponseDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.UserCreateDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.UserResponseDto;
 import com.compassuol.sp.challenge.msuser.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -33,12 +33,12 @@ public class UserMapper {
     }
     public UserResponseDto entityToResponse(User user) {
 
+        SimpleDateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat formatoIso = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
 
         try {
             Date dataIso = formatoIso.parse(user.getBirthDate().toString());
 
-            SimpleDateFormat formatoSaida = new SimpleDateFormat("dd/MM/yyyy");
 
             String dataFormatada = formatoSaida.format(dataIso);
             return new UserResponseDto(user.getId(),

@@ -1,7 +1,7 @@
 package com.compassuol.sp.challenge.msuser.service;
 
-import com.compassuol.sp.challenge.msuser.dto.user.LoginRequestDto;
-import com.compassuol.sp.challenge.msuser.dto.user.UserCreateDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.LoginRequestDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.UserCreateDto;
 import com.compassuol.sp.challenge.msuser.exception.customexceptions.UserValidationException;
 import com.compassuol.sp.challenge.msuser.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

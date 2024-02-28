@@ -1,9 +1,10 @@
 package com.compassuol.sp.challenge.msuser.controller;
 
 
-import com.compassuol.sp.challenge.msuser.dto.user.UserCreateDto;
-import com.compassuol.sp.challenge.msuser.dto.user.UserResponseDto;
-import com.compassuol.sp.challenge.msuser.dto.user.UserStateDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.PasswordChangeDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.UserCreateDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.UserResponseDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.UserStateDto;
 import com.compassuol.sp.challenge.msuser.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @PutMapping("/v1/users/{id}/password")
-    public ResponseEntity<?> changePassword(@PathVariable Long id, @RequestBody String newPassword) {
+    public ResponseEntity<?> changePassword(@PathVariable Long id, @RequestBody PasswordChangeDto newPassword) {
         userService.changePassword(id, newPassword);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }

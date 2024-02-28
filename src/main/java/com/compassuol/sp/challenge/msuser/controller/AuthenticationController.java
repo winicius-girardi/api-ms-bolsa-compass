@@ -1,6 +1,6 @@
 package com.compassuol.sp.challenge.msuser.controller;
 
-import com.compassuol.sp.challenge.msuser.dto.user.LoginRequestDto;
+import com.compassuol.sp.challenge.msuser.dto.userDto.LoginRequestDto;
 import com.compassuol.sp.challenge.msuser.exception.ErrorMessage;
 import com.compassuol.sp.challenge.msuser.jwt.JwtToken;
 import com.compassuol.sp.challenge.msuser.jwt.JwtUserDetailsService;

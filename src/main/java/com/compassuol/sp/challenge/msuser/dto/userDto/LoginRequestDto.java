@@ -1,4 +1,4 @@
-package com.compassuol.sp.challenge.msuser.dto.user;
+package com.compassuol.sp.challenge.msuser.dto.userDto;
 
 public class LoginRequestDto {
 

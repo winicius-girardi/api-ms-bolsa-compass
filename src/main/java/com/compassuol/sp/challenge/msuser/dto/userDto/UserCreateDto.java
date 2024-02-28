@@ -1,8 +1,7 @@
-package com.compassuol.sp.challenge.msuser.dto.user;
+package com.compassuol.sp.challenge.msuser.dto.userDto;
 
-public class UserResponseDto {
+public class UserCreateDto {
 
-    private Long id;
     private String firstName;
     private String lastName;
 
@@ -13,36 +12,22 @@ public class UserResponseDto {
 
     private String cep;
 
+    private String password;
+
     private boolean active;
 
 
-    public UserResponseDto(Long id, String firstName, String lastName, String cpf, String birthdate, String email, String cep,boolean active){
-        this.id = id;
+    public UserCreateDto() {
+    }
+    public UserCreateDto(String firstName, String lastName, String cpf, String birthdate, String email, String cep, String password, boolean active) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.cpf = cpf;
         this.birthdate = birthdate;
         this.email = email;
         this.cep = cep;
-        this.active =active;
-    }
-
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
+        this.password = password;
         this.active = active;
-    }
-
-    public UserResponseDto(){}
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -93,6 +78,20 @@ public class UserResponseDto {
         this.cep = cep;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 
 }
