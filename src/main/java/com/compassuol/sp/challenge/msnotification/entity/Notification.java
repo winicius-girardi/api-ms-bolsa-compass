@@ -1,11 +1,13 @@
 package com.compassuol.sp.challenge.msnotification.entity;
 
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
+@Document
 public class Notification {
 
 
@@ -13,6 +15,7 @@ public class Notification {
 
     private Event event;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime date;
 
     public Notification(String email, Event event, LocalDateTime date) {
@@ -58,7 +61,7 @@ public class Notification {
         return Objects.hash(email, event, date);
     }
 
-    private enum Event {
+    public enum Event {
         LOGIN, CREATE, UPDATE, UPDATE_PASSWORD
     }
 }

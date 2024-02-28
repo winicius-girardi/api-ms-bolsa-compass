@@ -10,7 +10,10 @@ spring:
     port: 5672
     username: guest
     password: guest
-
+  data:
+    mongodb:
+      database: ms_notification
+      uri: mongodb://localhost:27017/?authSource=teste
 server:
   port: 8082
 
