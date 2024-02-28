@@ -1,7 +1,9 @@
 package com.compassuol.sp.challenge.msaddress.dto;
 
 import com.compassuol.sp.challenge.msaddress.entity.Address;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AddressMapper {
 
 
@@ -19,7 +21,7 @@ public class AddressMapper {
                 addressResponseDto.getSiafi());
     }
 
-    public AddressResponseDto dtoToEntity(Address address) {
+    public AddressResponseDto entityToDto(Address address) {
         return new AddressResponseDto(address.getCep(),
                 address.getLogradouro(),
                 address.getComplemento(),

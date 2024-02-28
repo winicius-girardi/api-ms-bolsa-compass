@@ -1,9 +1,6 @@
 package com.compassuol.sp.challenge.msaddress.dto;
 
-import jakarta.persistence.*;
-
 import java.io.Serializable;
-import java.util.Objects;
 
 
 public class AddressResponseDto implements Serializable{
@@ -115,4 +112,6 @@ public class AddressResponseDto implements Serializable{
     public void setSiafi(String siafi) {
         this.siafi = siafi;
     }
+
+
 }

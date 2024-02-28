@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
+//TODO REMOVE THIS CONTROLLER IF NOT HOST ON AMAZON
 @RestController
 public class AddressController {
 
