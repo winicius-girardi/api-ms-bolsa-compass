@@ -3,6 +3,7 @@ package com.compassuol.sp.challenge.msuser.dto.mapper;
 import com.compassuol.sp.challenge.msuser.dto.userDto.UserCreateDto;
 import com.compassuol.sp.challenge.msuser.dto.userDto.UserResponseDto;
 import com.compassuol.sp.challenge.msuser.entity.User;
+import com.compassuol.sp.challenge.msuser.exception.customexceptions.UserValidationException;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -52,7 +53,7 @@ public class UserMapper {
             );
         }
         catch (ParseException e) {
-            throw new RuntimeException(e);
+            throw new UserValidationException("Date format is invalid");
         }
 
     }

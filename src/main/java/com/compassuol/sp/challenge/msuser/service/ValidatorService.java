@@ -2,6 +2,7 @@ package com.compassuol.sp.challenge.msuser.service;
 
 import com.compassuol.sp.challenge.msuser.dto.userDto.LoginRequestDto;
 import com.compassuol.sp.challenge.msuser.dto.userDto.UserCreateDto;
+import com.compassuol.sp.challenge.msuser.exception.customexceptions.ConstraintViolationException;
 import com.compassuol.sp.challenge.msuser.exception.customexceptions.UserValidationException;
 import com.compassuol.sp.challenge.msuser.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,7 +85,7 @@ public class ValidatorService {
             throw new UserValidationException("CPF must have only numbers");
         }
         if(userRepository.findByCpf(cpf)!=null){
-            throw new UserValidationException("CPF already registered");
+            throw new ConstraintViolationException("CPF already registered");
         }
         int[] multiplicadores1 = {10, 9, 8, 7, 6, 5, 4, 3, 2};
         int[] multiplicadores2 = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
@@ -130,7 +131,7 @@ public class ValidatorService {
     public void  validateEmail(String email){
         validateEmailSintax(email);
         if(userRepository.findByEmail(email)!=null){
-            throw new UserValidationException("Email already registered");
+            throw new ConstraintViolationException("Email already registered");
         }
 
 

@@ -6,11 +6,14 @@ import com.compassuol.sp.challenge.msuser.dto.userDto.UserCreateDto;
 import com.compassuol.sp.challenge.msuser.dto.userDto.UserResponseDto;
 import com.compassuol.sp.challenge.msuser.entity.User;
 import com.compassuol.sp.challenge.msuser.exception.customexceptions.EntityNotFoundException;
+import com.compassuol.sp.challenge.msuser.exception.customexceptions.UserValidationException;
 import com.compassuol.sp.challenge.msuser.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.text.ParseException;
 
 
 @Service
@@ -29,9 +32,10 @@ public class UserService {
     @Autowired
     private ValidatorService validatorService;
     @Transactional
-    public UserResponseDto createUser(UserCreateDto userRequestDto) {
+    public UserResponseDto createUser(UserCreateDto userRequestDto)   {
         validatorService.validatePerson(userRequestDto);
-        var user = userMapper.createDtoToEntity(userRequestDto);
+        User user;
+        user = userMapper.createDtoToEntity(userRequestDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         var savedUser = userRepository.save(user);
 
