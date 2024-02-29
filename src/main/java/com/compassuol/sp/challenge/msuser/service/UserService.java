@@ -38,7 +38,6 @@ public class UserService {
         user = userMapper.createDtoToEntity(userRequestDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         var savedUser = userRepository.save(user);
-
         publisherService.sendNotification(savedUser.getEmail(),"CREATE");
         publisherService.sendAddress(savedUser.getCep(),savedUser.getId());
         return userMapper.entityToResponse(savedUser);

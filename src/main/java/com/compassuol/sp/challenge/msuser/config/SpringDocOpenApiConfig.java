@@ -18,7 +18,6 @@ public class SpringDocOpenApiConfig {
                                 .title("MS User API")
                                 .description("API for user management.")
                                 .version("v1.0")
-                                .contact(new Contact().name("Winicius Girardi - Linkedin").url("https://www.linkedin.com/in/winicius-girardi"))
                                 .contact(new Contact().name("Winicius Girardi - Github").url("https://github.com/winicius-girardi")
                         )
                 );

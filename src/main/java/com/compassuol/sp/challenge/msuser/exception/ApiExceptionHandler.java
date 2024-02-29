@@ -21,13 +21,13 @@ public class ApiExceptionHandler {
 
     @ExceptionHandler({UserValidationException.class})
     public ResponseEntity<ErrorMessage> userValidationException(UserValidationException ex,
-                                                                        HttpServletRequest request,
-                                                                        BindingResult result) {
+                                                                        HttpServletRequest request
+                                                                         ) {
 
         return ResponseEntity
                 .status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage(), result));
+                .body(new ErrorMessage(request, HttpStatus.UNPROCESSABLE_ENTITY, ex.getMessage()));
     }
 
     @ExceptionHandler({PublisherRequestException.class})
@@ -39,6 +39,17 @@ public class ApiExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.BAD_REQUEST, "Ocorreu algum erro com o publisher\n"+ex.getMessage()));
+
+    }
+    @ExceptionHandler({org.springframework.http.converter.HttpMessageNotReadableException.class})
+    public ResponseEntity<ErrorMessage> badRequest(RuntimeException ex,
+                                                           HttpServletRequest request
+    ) {
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request, HttpStatus.BAD_REQUEST, "Erro na requisição"));
 
     }
     @ExceptionHandler({ConstraintViolationException.class})
@@ -75,7 +86,7 @@ public class ApiExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorMessage> internalServerErrorException(Exception ex, HttpServletRequest request) {
+    public ResponseEntity<ErrorMessage> internalServerErrorException(RuntimeException ex, HttpServletRequest request) {
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contentType(MediaType.APPLICATION_JSON)

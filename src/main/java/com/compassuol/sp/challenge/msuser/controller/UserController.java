@@ -30,7 +30,7 @@ public class UserController {
 
 
 
-    @Operation(summary = "Cria um novo usuário.", description = "recurso para criar um novo usuário na API.",
+    @Operation(summary = "Cria um novo usuário.", description = "Recurso para criar um novo usuário na API.",
         responses = {
             @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso.",
                 content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
@@ -49,13 +49,13 @@ public class UserController {
 
 
 
-    @Operation(summary = "Busca um usuário pelo id.", description = "recurso para buscar um usuário pelo id na API.",
+    @Operation(summary = "Busca um usuário pelo id.", description = "Recurso para recuperar um usuário pelo id.",
         responses = {
             @ApiResponse(responseCode = "200", description = "Usuário encontrado com sucesso.",
                 content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado.",
-                content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
-            )
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
+            @ApiResponse(responseCode = "403", description = "Acesso negado. Necesário autenticação.")
         }
     )
     @GetMapping("/v1/users/{id}")
@@ -65,14 +65,14 @@ public class UserController {
 
 
 
-    @Operation(summary = "Altera a senha de um usuário.", description = "recurso para alterar a senha de um usuário na API.",
+    @Operation(summary = "Altera a senha de um usuário.", description = "Recurso para alterar a senha de um usuário na API.",
         responses = {
             @ApiResponse(responseCode = "204", description = "Senha alterada com sucesso."),
             @ApiResponse(responseCode = "422", description = "Senha fornecida é invalida e/ou igual a atual.",
                 content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado.",
-                content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
-            )
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
+            @ApiResponse(responseCode = "403", description = "Acesso negado. Necesário autenticação.")
         }
     )
     @PutMapping("/v1/users/{id}/password")
@@ -83,12 +83,12 @@ public class UserController {
 
 
 
-    @Operation(summary = "Altera o estado de um usuário.", description = "recurso para alterar o estado de um usuário na API.",
+    @Operation(summary = "Altera o estado de um usuário.", description = "Recurso para alterar o estado de um usuário na API.",
         responses = {
             @ApiResponse(responseCode = "204", description = "Estado do usuário alterado com sucesso."),
             @ApiResponse(responseCode = "404", description = "Usuário não encontrado.",
-                content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))
-            )
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorMessage.class))),
+            @ApiResponse(responseCode = "403", description = "Acesso negado. Necesário autenticação.")
         }
     )
     @PutMapping("/v1/users/{id}")

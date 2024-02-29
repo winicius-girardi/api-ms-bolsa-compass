@@ -22,7 +22,6 @@ public class ValidatorService {
     @Autowired
     private UserRepository userRepository;
 
-    //TODO: VALIDAR SE CAMPO ACTIVE É BOOLEAN
     public void validatePerson(UserCreateDto user) {
         validateEmail(user.getEmail());
         validatePassword(user.getPassword());
@@ -54,21 +53,28 @@ public class ValidatorService {
         if(firstName.replaceAll(" ","").length()<3){
             throw new UserValidationException("First name must have at least 3 characters");
         }
-        if(lastName.length()<3){
+        if(firstName.matches(".*\\d.*")){
+            throw new UserValidationException("First name must have only letters");
+        }
+        if(lastName.replaceAll(" ","").length()<3){
             throw new UserValidationException("Last name must have at least 3 characters");
+        }
+        if(lastName.matches(".*\\d.*")){
+            throw new UserValidationException("Last name must have only letters");
         }
     }
 
-    public void validateLogin(LoginRequestDto loginRequestDto) {
+
+    public void validateLogin(LoginRequestDto loginRequestDto){
         validateEmailSintax(loginRequestDto.getEmail());
         validatePassword(loginRequestDto.getPassword());
-        var loginAttempt= userRepository.findByEmail(loginRequestDto.getEmail());
-        if(loginAttempt==null){
-            throw new UserValidationException("Invalid username or password");
-        }
-        if(!passwordEncoder.matches(loginRequestDto.getPassword(),loginAttempt.getPassword())){
-            throw new UserValidationException("Invalid username or password");
-        }
+//        var loginAttempt= userRepository.findByEmail(loginRequestDto.getEmail());
+//        if(loginAttempt==null){
+//            throw new UserValidationException("Invalid username or password");
+//        }
+//        if(!passwordEncoder.matches(loginRequestDto.getPassword(),loginAttempt.getPassword())){
+//            throw new UserValidationException("Invalid username or password");
+//        }
 
 
     }
@@ -77,16 +83,14 @@ public class ValidatorService {
 
 
     public void validateCpf(String cpf) {
-        cpf=cpf.replaceAll("[.-]","");
-        if(cpf.length()!=11){
-            throw new UserValidationException("CPF must have 11 characters");
+        if(!cpf.matches("\\d{3}.\\d{3}.\\d{3}-\\d{2}")){
+            throw new UserValidationException("CPF must have the following format: 123.456.789-10");
         }
-        if(!cpf.matches("\\d+")){
-            throw new UserValidationException("CPF must have only numbers");
-        }
-        if(userRepository.findByCpf(cpf)!=null){
+        if(userRepository.getUserByCpf(cpf)!=null) {
             throw new ConstraintViolationException("CPF already registered");
         }
+        cpf=cpf.replaceAll("[.-]","");
+
         int[] multiplicadores1 = {10, 9, 8, 7, 6, 5, 4, 3, 2};
         int[] multiplicadores2 = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
 
