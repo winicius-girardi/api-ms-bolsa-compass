@@ -18,14 +18,14 @@ Não foi possível implementar os testes também, devido a falta de tempo.
 - Configure o RabbitMQ caso você não tenha configurado, a instrução está no repositório do microserviço de user, junto com o arquivo necessário.
 
 
-MySql
+- MySql
 Abre o arquivo que está no path:src/main/resources/application.yml e altere os campos {USER} E {SENHA} com um usuário válido do seu banco mysql
 ```
 datasource:
   username:{USER}
   passowrd:{SENHA}
 ```
-Rode também o script schema.sql contido na raiz do repositório no seu banco para criar o schema da applicação ou execute a query:
+Rode também o script script.sql contido na raiz do repositório no seu banco para criar o schema da applicação ou execute a query:
 ```
 CREATE SCHEMA `ms_address` DEFAULT CHARACTER SET utf8 ;
 ```
