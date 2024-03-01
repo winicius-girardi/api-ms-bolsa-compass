@@ -30,7 +30,7 @@ Não consegui elaborar o docker compose do rabbitmq, porém da para criar a imag
 ```
 docker run -it --name rabbitmq_desafio -p 5672:5672 -p 15672:15672 rabbitmq:3.13-management
 ```
-Apos isso, com a container rodando faça o Login com user:guest password:guest no locahost:15672, na aba Overview, clique em import definitions, clique em import e selecione o arquivo definitions.json.
+Após isso, com a container rodando faça o Login com user:guest password:guest no locahost:15672, na aba Overview, clique em import definitions, clique em import e selecione o arquivo definitions.json.
 
 MySql
 Abre o arquivo que está no path:src/main/resources/application.yml e altere os campos {USER} E {SENHA} com um usuário válido do seu banco mysql
@@ -43,10 +43,10 @@ Rode também o script schema.sql contido na raiz do repositório no seu banco pa
 ```
 CREATE SCHEMA `ms_user` DEFAULT CHARACTER SET utf8 ;
 ```
-Aplicação
--Necessário também que o rabbitmq esteja rodando!
+### - Aplicação
+- Necessário também que o rabbitmq esteja rodando!
 
-Execute no cli com:
+Execute no cli:
 ```
 mvn spring-boot:run
 ```
