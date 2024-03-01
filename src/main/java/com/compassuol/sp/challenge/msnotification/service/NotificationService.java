@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.compassuol.sp.challenge.msnotification.entity.Notification.Event;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static com.compassuol.sp.challenge.msnotification.entity.Notification.Event.*;
 
@@ -39,11 +42,11 @@ public class NotificationService {
             System.out.println("Email inválido");
             return false;
         }
-        if (notification.getDate().matches("^(\\d{4}-\\d{2}-\\d{2})T(\\d{2}:\\d{2}:\\d{2})Z$")) {
+        if (!notification.getDate().matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}Z")) {
             System.out.println("Data inválida");
             return false;
         }
-        if(notification.getEvent().matches("LOGIN||CREATE||UPDATE||UPDATE_PASSWORD")){
+        if(!notification.getEvent().matches("^(LOGIN|CREATE|UPDATE|UPDATE_PASSWORD)$")){
             System.out.println("Evento inválido");
             return false;
         }
@@ -52,7 +55,8 @@ public class NotificationService {
 
     public void saveNotification(NotificationRequestDto notificationRequestDto) {
         Event event = Event.valueOf(notificationRequestDto.getEvent());
-        Notification notification = new Notification(notificationRequestDto.getEmail(), event , LocalDateTime.parse(notificationRequestDto.getDate()));
+        ZonedDateTime zonedDateTime = ZonedDateTime.parse(notificationRequestDto.getDate(), DateTimeFormatter.ISO_DATE_TIME);
+        Notification notification = new Notification(notificationRequestDto.getEmail(), event , zonedDateTime.toLocalDateTime());
         notificationRepository.save(notification);
     }
 }

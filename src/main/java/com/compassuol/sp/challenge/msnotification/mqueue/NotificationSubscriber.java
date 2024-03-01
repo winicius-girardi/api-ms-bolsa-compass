@@ -17,7 +17,7 @@ public class NotificationSubscriber {
 
 
     @RabbitListener(queues = "${mq.queue.ms-notifications}")
-    public void receiveMessage(@Payload String message){//{"id_user":34,"cep":"69999-999"}
+    public void receiveMessage(@Payload String message){
         notificationService.processRequest(message);
     }
 
