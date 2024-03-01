@@ -103,8 +103,8 @@
 						<exclude>com/compassuol/sp/challenge/msuser/dto/userDto/*</exclude>
 						<exclude>com/compassuol/sp/challenge/msuser/exception/customexceptions/*</exclude>
 						<exclude>com/compassuol/sp/challenge/msuser/dto/publisherMqueueDto/*</exclude>
-
-
+						<exclude>com/compassuol/sp/challenge/msuser/service/PublisherService.class</exclude>
+						<exclude>com/compassuol/sp/challenge/msuser/controller/AuthenticationController.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>

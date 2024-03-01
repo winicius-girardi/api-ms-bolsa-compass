@@ -23,5 +23,9 @@ public class ValidatorConstraints {
     public static final String VALID_CPF = "209.385.740-51";
     public static final String INVALID_CPF = "209.385.740-52";
 
+    public static final Long VALID_ID = 1L;
+
+    public static final Long INVALID_ID = 0L;
+
 
 }
