@@ -2,6 +2,7 @@ package com.compassuol.sp.challenge.msuser.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.Constraint;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -9,7 +10,10 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user",uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email"),
+        @UniqueConstraint(columnNames = "cpf")
+})
 public class User implements Serializable {
 
     @Id

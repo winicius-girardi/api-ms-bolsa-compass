@@ -28,8 +28,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
-
     @Operation(summary = "Cria um novo usuário.", description = "Recurso para criar um novo usuário na API.",
         responses = {
             @ApiResponse(responseCode = "201", description = "Usuário criado com sucesso.",

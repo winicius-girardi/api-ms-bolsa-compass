@@ -32,10 +32,10 @@ public class UserService {
     @Autowired
     private ValidatorService validatorService;
     @Transactional
-    public UserResponseDto createUser(UserCreateDto userRequestDto)   {
-        validatorService.validatePerson(userRequestDto);
+    public UserResponseDto createUser(UserCreateDto userCreateDto)   {
+        validatorService.validatePerson(userCreateDto);
         User user;
-        user = userMapper.createDtoToEntity(userRequestDto);
+        user = userMapper.createDtoToEntity(userCreateDto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         var savedUser = userRepository.save(user);
         publisherService.sendNotification(savedUser.getEmail(),"CREATE");

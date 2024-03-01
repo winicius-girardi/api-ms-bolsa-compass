@@ -32,18 +32,14 @@ public class ValidatorService {
 
     }
 
-    private void validateBirthdate(String birthDate) {
+    public void validateBirthdate(String birthDate) {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        try {
-            LocalDate.parse(birthDate, formatter);
-        } catch (DateTimeParseException e) {
+        if (!birthDate.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
             throw new UserValidationException("Invalid birthdate");
         }
     }
 
-    private void validateCep(String cep) {
+    public void validateCep(String cep) {
         if(!cep.matches("\\d{5}-\\d{3}$")){
             throw new UserValidationException("CEP must have the following format: 12345-123");
         }
@@ -141,7 +137,7 @@ public class ValidatorService {
 
     }
 
-    private  void validateEmailSintax(String email) {
+    public void validateEmailSintax(String email) {
         if(!email.matches("^(.+)@(.+)$")){
             throw new UserValidationException("Invalid email");
         }
