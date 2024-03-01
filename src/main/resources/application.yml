@@ -1,0 +1,38 @@
+
+spring:
+  mvc:
+    format:
+      date-time: iso
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/ms_user?useTimezone=true&serverTimezone=UTC
+    username: root
+    password: 123456
+
+  application:
+    name: msuser
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+server:
+  port: 8080
+
+mq:
+  queues:
+    ms-notifications: ms-notifications
+    ms-address: ms-address
+
+springdoc:
+  swagger-ui:
+    path: /doc_user.html
+  api-docs:
+    path: /doc_user
+  packages-to-scan: com.compassuol.sp.challenge.msuser.controller
