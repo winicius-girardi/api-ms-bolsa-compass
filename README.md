@@ -32,7 +32,7 @@ docker run -it --name rabbitmq_desafio -p 5672:5672 -p 15672:15672 rabbitmq:3.13
 ```
 Após isso, com a container rodando faça o Login com user:guest password:guest no locahost:15672, na aba Overview, clique em import definitions, clique em import e selecione o arquivo definitions.json.
 
-MySql
+### MySQL
 Abre o arquivo que está no path:src/main/resources/application.yml e altere os campos {USER} E {SENHA} com um usuário válido do seu banco mysql
 ```
 datasource:
