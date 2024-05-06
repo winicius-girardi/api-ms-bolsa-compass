@@ -1,0 +1,23 @@
+spring:
+  mvc:
+    format:
+      date-time: iso
+
+  application:
+    name: msaddress
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  data:
+    mongodb:
+      database: ms_notification
+      uri: mongodb://localhost:27017/?authSource=teste
+server:
+  port: 8082
+
+mq:
+  queue:
+    ms-notifications: ms-notifications
+
