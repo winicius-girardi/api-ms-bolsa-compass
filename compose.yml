@@ -1,0 +1,53 @@
+version: '3.9'
+services:
+  ms-address:
+    container_name: ms-address
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - ms-net
+    depends_on:
+      - db-mySql
+
+  ms-notification:
+    container_name: ms-address
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    networks:
+      - ms-net
+    depends_on:
+      - db-mongoDb
+  ms-user:
+    container_name: ms-address
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8081"
+    networks:
+      - ms-net
+    depends_on:
+      - db-mySql
+  db-mongo:
+    image: mongodb/mongodb-community-server
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: teste
+      MONGO_INITDB_ROOT_PASSWORD: teste
+  db-mySql:
+    container_name: db_gps
+    image:  mysql:8.0.37-debian
+    restart: unless-stopped
+    volumes:
+      - ./ms-address/script.sql:/docker-entrypoint-initdb.d/script.sql
+      - ./ms-user/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - "3306"
+    networks:
+      - ms-net
+networks:
+  ms-net:
